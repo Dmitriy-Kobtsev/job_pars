@@ -11,7 +11,7 @@ class HeadHanterAPI(ApiJob):
             "per_page": 2,  # Number of vacancies per page
         }
         headers = {
-            "User-Agent": "kdm007@mail.ru",  # Replace with your User-Agent header
+            "User-Agent": "kdm007@mail.ru",
         }
 
         response = requests.get(self.url, params=params, headers=headers)
@@ -20,11 +20,17 @@ class HeadHanterAPI(ApiJob):
             data = response.json()
             vacancies = data.get("items", [])
             for vacancy in vacancies:
-                # Extract relevant information from the vacancy object
-                vacancy_id = vacancy.get("id")
-                vacancy_title = vacancy.get("name")
-                vacancy_url = vacancy.get("alternate_url")
-                company_name = vacancy.get("employer", {}).get("name")
-                print(f"ID: {vacancy_id}\nTitle: {vacancy_title}\nCompany: {company_name}\nURL: {vacancy_url}\n")
+                print(vacancy)
+                self.vacancy_id = vacancy.get("id")
+                self.vacancy_title = vacancy.get("name")
+
+                self.vacancy_url = vacancy.get("alternate_url")
+                self.company_name = vacancy.get("employer", {}).get("name")
+                if vacancy.get('salary') == None :
+                    self.vacancy_salary = None
+                else:
+                    self.vacancy_salary = f"{vacancy.get('salary')['from']}-{vacancy.get('salary')['to']}"
+                #print(f"ID: {self.vacancy_id}\nTitle: {self.vacancy_title}\nCompany: {self.company_name}\nURL: {self.vacancy_url}\n")
+                print('salary: ', self.vacancy_salary)
         else:
             print(f"Request failed with status code: {response.status_code}")
