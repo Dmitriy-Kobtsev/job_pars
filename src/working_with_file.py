@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 class WorkFile(ABC):
 
     @abstractmethod
-    def save_to_file(self, *args, **kwargs):
+    def add_vacancy(self, *args, **kwargs):
         pass
 
     @abstractmethod
