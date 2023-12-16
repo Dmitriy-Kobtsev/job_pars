@@ -18,6 +18,8 @@ class HeadHanterAPI(ApiJob):
 
         if response.status_code == 200:
             data = response.json()
+            print(data)
+            print('____')
             vacancies = data.get("items", [])
             for vacancy in vacancies:
                 print(vacancy)
