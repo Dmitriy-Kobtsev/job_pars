@@ -14,4 +14,4 @@ class Vacancy:
     def __str__(self):
         return f'"Title": {self.title}, "Company": {self.company}, "URL": {self.url}, "salary": {self.salary}, ' \
                f'"about": {self.about}, ' \
-               f'"requirements": {self.requirement}'
+               f'"requirement": {self.requirement}'
