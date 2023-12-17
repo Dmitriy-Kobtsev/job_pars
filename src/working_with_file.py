@@ -7,9 +7,9 @@ class WorkFile(ABC):
         pass
 
     @abstractmethod
-    def del_vacancy(self):
+    def del_vacancy(self, *args, **kwargs):
         pass
 
     @abstractmethod
-    def get_vacancies_by_salary(self):
+    def get_vacancies_by_salary(self, *args, **kwargs):
         pass

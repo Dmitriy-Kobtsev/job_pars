@@ -1,6 +1,7 @@
 from src.HeadHunter import HeadHanterAPI
 from src.vacancies import Vacancy
 from src.Saved_json import SaveJson
+from src.SuperJob import SuperJobAPI
 import json
 
 
@@ -18,9 +19,25 @@ def filter_vacancies(hh_vacancies, filter_words):
 
 
 if __name__ == '__main__':
+    sj = SuperJobAPI()
+
     hh = HeadHanterAPI()
     json_saver = SaveJson()
     search_query = input('Введите поисковый запрос: ')
+    vacancies = sj.get_vacancies(search_query)
+    for data in vacancies:
+        print(data)
+        vacancy = Vacancy(
+            data.get('id'),
+            data.get('profession'),
+            data.get('link'),
+            f'{data.get("payment_from")}-{data.get("payment_to")}',
+            data.get('firm_name'),
+            data.get('vacancyRichText'),
+            data.get('candidat'),
+        )
+        json_saver.add_vacancy(vacancy, "sj_vacancies")
+
     N_need_vacancies = int(input('Введите необходимое количество вакансий: '))
     vacancies = hh.get_vacancies(search_query, N_need_vacancies)
     for data in vacancies:
@@ -39,7 +56,7 @@ if __name__ == '__main__':
             data.get("snippet", {}).get("requirement")
         )
         json_saver.add_vacancy(vacancy, "hh_vacancies")
-    print('Файл с вакансиями сформирован!')
+    print('Файлы с вакансиями сформирован!')
     with open('hh_vacancies.json', 'r', encoding='utf-8') as file:
         hh_vacancies = json.load(file)
     print(type(hh_vacancies))
