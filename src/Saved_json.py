@@ -11,7 +11,8 @@ class SaveJson(WorkFile):
             'Title': vacancy.title,
             'Company': vacancy.company,
             'URL': vacancy.url,
-            'salary': vacancy.salary,
+            'salary_from': vacancy.salary_from,
+            'salary_to': vacancy.salary_to,
             'about': vacancy.about,
             'requirement': vacancy.requirement
         }
@@ -26,7 +27,7 @@ class SaveJson(WorkFile):
             json.dump(data, file, indent=2, ensure_ascii=False)
 
     def get_vacancies_by_salary(self, salary, file_name):
-
+        select_vacancies = []
         try:
             from_salary, to_salary = salary.split('-')
         except ValueError:
@@ -37,15 +38,18 @@ class SaveJson(WorkFile):
 
         for vacancy in vacancies:
             try:
-                from_salary_in_vacancy, to_salary_in_vacancy = vacancy['salary'].split('-')
-                if int(from_salary) >= int(from_salary_in_vacancy) and int(from_salary) <= int(to_salary_in_vacancy):
-                    print(f'Title: {vacancy["Title"]}')
-                    print(f"URL: {vacancy['URL']}")
-                    print(f"Company: {vacancy['Company']}")
+                from_salary_in_vacancy = vacancy['salary_from']
+                to_salary_in_vacancy = vacancy['salary_to']
+                if int(to_salary_in_vacancy) != 0:
+                    if int(from_salary) >= int(from_salary_in_vacancy) and int(from_salary) <= int(to_salary_in_vacancy):
+                        select_vacancies.append(vacancy)
+                elif int(from_salary) >= int(from_salary_in_vacancy):
+                    select_vacancies.append(vacancy)
             except AttributeError:
                 pass
             except ValueError:
                 pass
+        return select_vacancies
 
     def del_vacancy(self, vacancy):
 
