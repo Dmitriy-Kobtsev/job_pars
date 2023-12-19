@@ -5,14 +5,13 @@ class HeadHanterAPI(ApiJob):
 
     url = "https://api.hh.ru/vacancies"
 
-    def get_vacancies(self, keyword, per_page):
+    def get_vacancies(self, keyword, email):
         params = {
             "text": keyword,
             "area": 113,  # Specify the desired area ID (1 is Moscow)
-            "per_page": per_page,  # Number of vacancies per page
         }
         headers = {
-            "User-Agent": "kdm007@mail.ru",
+            "User-Agent": email,
         }
 
         response = requests.get(HeadHanterAPI.url, params=params, headers=headers)
