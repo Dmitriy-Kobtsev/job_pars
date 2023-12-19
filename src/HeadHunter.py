@@ -2,13 +2,15 @@ from src.API_job_site import ApiJob
 import requests
 
 class HeadHanterAPI(ApiJob):
-
+    """
+    Класс для создания вакансий с сайта HeadHunter
+    """
     url = "https://api.hh.ru/vacancies"
 
     def get_vacancies(self, keyword, email):
         params = {
             "text": keyword,
-            "area": 113,  # Specify the desired area ID (1 is Moscow)
+            "area": 113,
         }
         headers = {
             "User-Agent": email,

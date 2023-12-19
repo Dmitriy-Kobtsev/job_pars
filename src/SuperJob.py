@@ -3,6 +3,9 @@ import requests
 import os
 
 class SuperJobAPI(ApiJob):
+    """
+    Класс для создания вакансий с сайта SuperJob
+    """
     api_key = os.getenv('SJ_key')
     url = 'https://api.superjob.ru/2.0/vacancies'
 

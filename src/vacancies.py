@@ -1,4 +1,7 @@
 class Vacancy:
+    """
+    класс вакансии
+    """
     def __init__(self, id_vacancy, title, url, salary_from, salary_to, company, about, requirement):
         self.id = id_vacancy
         self.title = title

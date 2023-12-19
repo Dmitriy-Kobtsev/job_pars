@@ -7,6 +7,12 @@ import json
 
 
 def filter_vacancies(vacancies, filter_words):
+    """
+    Функция фильтрации списка вакансий по ключевым словам
+    :param vacancies: список вакансий
+    :param filter_words: список ключевых слов
+    :return: список вакансий отобранных по ключевым словам
+    """
     data_vacavnies = []
     for vacancy in vacancies:
         for word in filter_words:
@@ -20,12 +26,26 @@ def filter_vacancies(vacancies, filter_words):
 
 
 def sort_vacancies(vacancies):
+    """
+    Функция сортировки списка вакансий по заработной плате.
+    :param vacancies: список вакансий
+    :return: отсортированный список вакансий
+    """
     return sorted(vacancies, key=lambda x: int(x['salary_from']), reverse=True)
 
 
 def print_vacansies(vacancies, top_N):
+    """
+    Функция вывода в консоль списка вакансий
+    :param vacancies: список вакансий
+    :param top_N: размер списка
+    :return:
+    """
     if top_N > len(vacancies):
         print('Нашлось вакансий меньше нужного')
+        for i in range(len(vacancies)):
+            print(f'Company: {vacancies[i]["Company"]}\nURL: {vacancies[i]["URL"]}')
+            print(f'salary_from: {vacancies[i]["salary_from"]}\nsalary_to: {vacancies[i]["salary_to"]}')
     else:
         for i in range(top_N):
             print(f'Company: {vacancies[i]["Company"]}\nURL: {vacancies[i]["URL"]}')
