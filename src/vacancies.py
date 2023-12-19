@@ -1,9 +1,10 @@
 class Vacancy:
-    def __init__(self, id_vacancy, title, url, salary, company, about, requirement):
+    def __init__(self, id_vacancy, title, url, salary_from, salary_to, company, about, requirement):
         self.id = id_vacancy
         self.title = title
         self.url = url
-        self.salary = salary
+        self.salary_from = salary_from
+        self.salary_to = salary_to
         self.company = company
         self.about = about
         self.requirement = requirement
