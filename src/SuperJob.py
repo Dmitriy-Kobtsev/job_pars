@@ -1,8 +1,9 @@
 from src.API_job_site import ApiJob
 import requests
+import os
 
 class SuperJobAPI(ApiJob):
-    Secret_key = 'v3.r.138036067.f7c4da8bc375450771803361c02af039635d085d.792e602f97376dc27b111bcc0ce5dae57e732092'
+    api_key = os.getenv('SJ_key')
     url = 'https://api.superjob.ru/2.0/vacancies'
 
     def get_vacancies(self, keyword):
@@ -12,7 +13,7 @@ class SuperJobAPI(ApiJob):
 
         headers = {
             'Host': 'api.superjob.ru',
-            'X-Api-App-Id': SuperJobAPI.Secret_key,
+            'X-Api-App-Id': SuperJobAPI.api_key,
             'Authorization': 'Bearer r.000000010000001.example.access_token',
             'Content-Type': 'application/x-www-form-urlencoded'
         }
